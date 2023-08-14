@@ -1,8 +1,8 @@
 export default function Page() {
   const stats = [
-    { id: 1, name: 'HVAC', value: 'False', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
+    { id: 1, name: 'HVAC', value: 'Off', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
     { id: 2, name: 'Doors', value: 'Locked', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
-    { id: 3, name: 'Flash Lights', value: '13', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
+    { id: 3, name: 'Flash Lights', value: 'Off', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
     { id: 4, name: 'Trunk', value: 'Closed', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' }
   ]
   return (
