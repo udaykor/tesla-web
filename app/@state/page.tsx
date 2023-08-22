@@ -34,3 +34,6 @@ export default function Page() {
     </div>
   )
 }
+
+export const revalidate = 100;
+export const runtime = 'edge';

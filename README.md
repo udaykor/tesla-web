@@ -32,3 +32,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+## Tesla Auth page
+
+https://auth.tesla.com/oauth2/v3/authorize?response_type=code&client_id=ownerapi&state=<RANDOM2>&code_challenge=<RANDDOM2>&code_challenge_method=S256&redirect_uri=https://auth.tesla.com/void/callback&scope=openid+email+offline_access
+
+
+## Example
+https://auth.tesla.com/oauth2/v3/authorize?response_type=code&client_id=ownerapi&state=pf4_osf0gpSBmVBCeg8VnQ&code_challenge=55WFKGyVLNQuuFnB91xFqeeNqLe4Bmn_MMuJNDdIG6A&code_challenge_method=S256&redirect_uri=https://auth.tesla.com/void/callback&scope=openid+email+offline_access

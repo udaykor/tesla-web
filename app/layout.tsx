@@ -13,10 +13,16 @@ export default function RootLayout(props: {
   commands: React.ReactNode
 }) {
   return (
-    <>
+    <html lang='en'>
+      <body>
         {props.children}
         {props.state}
         {props.commands}
-    </>
+      </body>
+    </html>
   )
 }
+
+
+export const revalidate = 100;
+export const runtime = 'edge';

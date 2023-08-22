@@ -1,8 +1,18 @@
-export default function Page() {
+import { getVehicles } from '@tesla-web/lib/state';
+
+async function getData() {
+  const data = await getVehicles()
+  return data;
+}
+
+
+export default async function Page() {
+  const data = await getData();
+
   const stats = [
-    { id: 1, name: 'HVAC', value: 'Off', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
-    { id: 2, name: 'Doors', value: 'Locked', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
-    { id: 3, name: 'Flash Lights', value: 'Off', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
+    { id: 1, name: 'API Version', value: data.response[0].api_version, bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
+    { id: 2, name: 'HVAC', value: 'Off', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200'},
+    { id: 3, name: 'State', value: data.response[0].state, bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
     { id: 4, name: 'Trunk', value: 'Closed', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' }
   ]
   return (
@@ -14,12 +24,13 @@ export default function Page() {
               Commands
             </h2>
             <p className="mt-4 text-lg leading-8 text-gray-600">
-              Car state is displayed below
+              Car state is displayed below for ID: {`${data.response[0].id}`}
             </p>
           </div>
-          <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+          <dl key={`commands-list-${data.response[0].id}`} className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
-              <button>
+              // onClick={() => {performAction('HVAC', data[0].id)}}
+              <button type='button'>
                 <div key={stat.id} className={`flex flex-col ${stat.bgColor? stat.bgColor: 'bg-gray-200'} p-8`}>
                   <dt className={`text-sm font-semibold leading-6 ${stat.subTextColor? stat.subTextColor: 'text-slate-950'}`}>{stat.name}</dt>
                   <dd className={`order-first text-3xl font-semibold tracking-tight ${stat.textColor? stat.textColor: 'text-slate-950'}`}>{stat.value}</dd>
@@ -32,3 +43,7 @@ export default function Page() {
     </div>
   )
 }
+
+
+export const revalidate = 100;
+export const runtime = 'edge';
