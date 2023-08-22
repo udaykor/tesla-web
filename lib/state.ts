@@ -23,7 +23,6 @@ export const getVehicle = async (id:string, access_token?:string)=>  {
     method: 'GET'
   })
   const data = await res.json();
-  console.log(data);
   return data;
 };
 
@@ -127,7 +126,6 @@ export const getGuiSettings = async (id:string, access_token?:string)=>  {
     },
     method: 'GET'
   })
-  console.log(res.status);
   const data = await res.json();
   return data;
 };

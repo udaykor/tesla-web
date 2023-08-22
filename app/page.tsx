@@ -1,6 +1,7 @@
 import { PlusSmallIcon } from '@heroicons/react/20/solid'
 import { LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline'
 import { getVehicles } from '@tesla-web/lib/state'
+import { NextPage } from 'next'
 import { SiTesla } from 'react-icons/si'
 
 const listAvailableVehicles = async () => {
@@ -8,8 +9,7 @@ const listAvailableVehicles = async () => {
   return data;
 }
 
-
-export default async function Page(props: React.ReactNode) {
+export default async function Page() {
   
   const data = await listAvailableVehicles();
 

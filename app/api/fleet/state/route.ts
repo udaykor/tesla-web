@@ -5,4 +5,4 @@ export async function GET() {
   // Get All Vehicles
   const vehicles = await getVehicles()
   return NextResponse.json({ vehicles })
-}
+};

@@ -29,8 +29,7 @@ export default async function Page() {
           </div>
           <dl key={`commands-list-${data.response[0].id}`} className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
-              // onClick={() => {performAction('HVAC', data[0].id)}}
-              <button type='button'>
+              <button key={`btn-${stat.id}`} type='button'>
                 <div key={stat.id} className={`flex flex-col ${stat.bgColor? stat.bgColor: 'bg-gray-200'} p-8`}>
                   <dt className={`text-sm font-semibold leading-6 ${stat.subTextColor? stat.subTextColor: 'text-slate-950'}`}>{stat.name}</dt>
                   <dd className={`order-first text-3xl font-semibold tracking-tight ${stat.textColor? stat.textColor: 'text-slate-950'}`}>{stat.value}</dd>
