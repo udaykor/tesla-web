@@ -1,4 +1,20 @@
+## About
+
+
+## To-Do
+1. Authentication with Auth0 + Auth.JS (Optionally).
+2. Deployment ready template with Vercel.
+3. Postgres for data-storage.
+4. Logging utility.
+5. Tesla Auth callback with-in browser (ETA: Nov 2023).
+6. Error handling.
+7. Tests with jest.
+8. Dockerfile (ETA: Aug 25, 2023).
+
+
+## Tech stack
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 
 ## Getting Started
 
@@ -35,7 +51,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 
-## Tesla Auth page
+## Tesla Auth page & Access Token
 
 https://auth.tesla.com/oauth2/v3/authorize?response_type=code&client_id=ownerapi&state=<RANDOM2>&code_challenge=<RANDDOM2>&code_challenge_method=S256&redirect_uri=https://auth.tesla.com/void/callback&scope=openid+email+offline_access
 
