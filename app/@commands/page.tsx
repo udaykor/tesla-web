@@ -16,16 +16,13 @@ export default async function Page() {
     { id: 4, name: 'Trunk', value: 'Closed', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' }
   ]
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="bg-white py-10 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Commands
             </h2>
-            <p className="mt-4 text-lg leading-8 text-gray-600">
-              Car state is displayed below for ID: {`${data.response[0].id}`}
-            </p>
           </div>
           <dl key={`commands-list-${data.response[0].id}`} className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (

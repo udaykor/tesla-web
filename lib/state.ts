@@ -40,6 +40,19 @@ export const getVehicleData = async (id:string, access_token?:string)=>  {
   return data;
 };
 
+export const getVehicleState = async (id:string, access_token?:string)=>  {
+  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const url = `${TESLA_API_BASE_URL}${id}/data_request/vehicle_state`
+  const res = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
+    method: 'GET'
+  })
+  const data = await res.json();
+  return data;
+};
 
 export const getServiceData = async (id:string, access_token?:string)=>  {
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
@@ -70,6 +83,7 @@ export const getMobileEnabled = async (id:string, access_token?:string)=>  {
   return data;
 };
 
+// Getting a 404
 export const getChargeState = async (id:string, access_token?:string)=>  {
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
   const url = `${TESLA_API_BASE_URL}${id}/data_request/charge_state`
@@ -80,11 +94,12 @@ export const getChargeState = async (id:string, access_token?:string)=>  {
     },
     method: 'GET'
   })
+  console.log(res.status);
   const data = await res.json();
   return data;
 };
 
-
+// This is a 404 - Aug 23
 export const getClimateState = async (id:string, access_token?:string)=>  {
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
   const url = `${TESLA_API_BASE_URL}${id}/data_request/climate_state`
@@ -95,6 +110,7 @@ export const getClimateState = async (id:string, access_token?:string)=>  {
     },
     method: 'GET'
   })
+  console.log(res.status);
   const data = await res.json();
   return data;
 };
