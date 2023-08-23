@@ -12,8 +12,10 @@ export const getVehicles = async () => {
   return data;
 };
 
-export const getVehicle = async (id:string, access_token?:string)=>  {
+export const getVehicle = async (id:string, uri?:string, access_token?:string)=>  {
+  console.log(uri);
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  
   const url = `${TESLA_API_BASE_URL}${id}`
   const res = await fetch(url, {
     headers: {
@@ -26,9 +28,9 @@ export const getVehicle = async (id:string, access_token?:string)=>  {
   return data;
 };
 
-export const getVehicleData = async (id:string, access_token?:string)=>  {
+export const getVehicleData = async (id:string, access_token?:string, uri?:string)=>  {
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
-  const url = `${TESLA_API_BASE_URL}${id}/vehicle_data`
+  const url = uri? uri: `${TESLA_API_BASE_URL}${id}/vehicle_data`
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
@@ -40,9 +42,10 @@ export const getVehicleData = async (id:string, access_token?:string)=>  {
   return data;
 };
 
-export const getVehicleState = async (id:string, access_token?:string)=>  {
+export const getVehicleState = async (id:string, access_token?:string, uri?:string)=>  {
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
-  const url = `${TESLA_API_BASE_URL}${id}/data_request/vehicle_state`
+  // Tainted input for the API call ges here.
+  const url = uri? uri: `${TESLA_API_BASE_URL}${id}/data_request/vehicle_state`
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',

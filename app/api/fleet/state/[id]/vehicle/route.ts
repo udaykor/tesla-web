@@ -1,4 +1,5 @@
 import { getVehicleData } from "@tesla-web/lib/state"
+import { url } from "inspector";
 import { NextResponse } from "next/server"
 
 // id and vehicle_id can be numbers?

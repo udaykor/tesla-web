@@ -23,6 +23,6 @@
       "@tesla-web/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/fleet/state/[id]/route.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/fleet/state/[id]/route.ts"],
   "exclude": ["node_modules"]
 }
