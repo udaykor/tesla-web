@@ -38,7 +38,7 @@ export default async function Page() {
           {/* Secondary navigation */}
           <header className="pb-4 pt-6 sm:pb-6">
             <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
-              <h1 className="text-base font-semibold leading-7 text-gray-900">Vehicles </h1>
+              <h1 className="text-base font-semibold leading-7 text-gray-900">Total Vehicles</h1>
               <div className="order-last flex w-full gap-x-8 text-sm font-semibold leading-6 sm:order-none sm:w-auto sm:border-l sm:border-gray-900 sm:pl-6 sm:leading-7">
                 {data.count}
               </div>
@@ -50,10 +50,6 @@ export default async function Page() {
               </button>
             </div>
           </header>
-        </div>
-
-        <div className='m-20 justify-center text-2xl'>
-          {data.response[0].display_name}
         </div>
       </main>
     </>
