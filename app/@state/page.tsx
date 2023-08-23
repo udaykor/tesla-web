@@ -1,7 +1,7 @@
 import { doRemoteStart, wakeUp } from "@tesla-web/lib/commands";
 import { getMobileEnabled, getVehicle, getVehicleData, getVehicles } from "@tesla-web/lib/state";
 import { BsFillRecord2Fill } from 'react-icons/bs';
-import { MILE_TO_KM_MUL } from "@tesla-web/lib/constants";
+import { MILE_TO_KM_MUL, BAR_TO_PSI } from "@tesla-web/lib/constants";
 
 
 async function getData() {
@@ -51,7 +51,16 @@ export default async function Page() {
     { id: 6, name: 'Odometer (KM)', value: odoKms, bgColor: 'bg-blue-600', textColor: 'text-gray-50', subTextColor: 'text-gray-300'},
     { id: 7, name: 'Service', value: vehicle.in_service.toString(), bgColor: vehicle.in_service === false ? 'bg-green-500': 'bg-red-400',subTextColor: 'text-white', textColor: 'text-white' },
     { id: 8, name: 'Charging State', value: vehicleDataRef?.ch_state? vehicleDataRef?.ch_state.charging_state: 'N/A', bgColor: vehicleDataRef?.ch_state.charging_state === 'Complete'? 'bg-green-500': 'bg-red-500', textColor: 'text-gray-50', subTextColor: 'text-gray-300'}
-  ]
+  ];
+
+  const tirePressureData = [
+    {id: 1, name: 'Front Left', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_fl*BAR_TO_PSI): 'N/A', bgColor: 'bg-gray-950', subTextColor: 'text-white', textColor: 'text-white' },
+    {id: 2, name: 'Front Right', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_fr*BAR_TO_PSI): 'N/A', bgColor: 'bg-gray-950', subTextColor: 'text-white', textColor: 'text-white' },
+    {id: 3, name: 'Rear Left', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_rl*BAR_TO_PSI): 'N/A', bgColor: 'bg-gray-950', subTextColor: 'text-white', textColor: 'text-white' },
+    {id: 4, name: 'Rear Right', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_rr*BAR_TO_PSI): 'N/A', bgColor: 'bg-gray-950', subTextColor: 'text-white', textColor: 'text-white' }
+  ];
+
+  vehicleDataRef?.vh_state
 
   return (
     <div className="bg-white py-10 sm:py-32">
@@ -62,14 +71,26 @@ export default async function Page() {
           </h2>
           <BsFillRecord2Fill className={`${recordColor} align-middle justify-center`}/>
           <p className="mt-4 text-lg leading-8 text-gray-600">
-            Vehicle state is displayed below
+            Current state
           </p>
         </div>
-        <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="mt-8 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.id} className={`flex flex-col ${stat.bgColor? stat.bgColor: 'bg-gray-200'} p-8`}>
               <dt className={`text-sm font-semibold leading-6 ${stat.subTextColor? stat.subTextColor: 'text-slate-950'}`}>{stat.name}</dt>
               <dd className={`order-first text-3xl font-bold tracking-tight ${stat.textColor? stat.textColor: 'text-slate-950'}`}>{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <p className="mt-4 text-lg leading-8 text-gray-600">
+            Cold tire pressure (PSI)
+        </p>
+        <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+          {tirePressureData.map((tire) => (
+            <div key={`${tire.name.toLocaleLowerCase()}-${tire.id}`} className={`flex flex-col ${(tire.bgColor && tire.value === 42) ? tire.bgColor: 'bg-red-500'} p-8`}>
+              <dt className={`text-sm font-semibold leading-6 ${tire.subTextColor? tire.subTextColor: 'text-slate-950'}`}>{tire.name}</dt>
+              <dd className={`order-first text-3xl font-bold tracking-tight ${tire.textColor? tire.textColor: 'text-slate-950'}`}>{tire.value}</dd>
             </div>
           ))}
         </dl>
