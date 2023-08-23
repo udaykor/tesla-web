@@ -13,7 +13,6 @@ export const getVehicles = async () => {
 };
 
 export const getVehicle = async (id:string, uri?:string, access_token?:string)=>  {
-  console.log(uri);
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
   
   const url = `${TESLA_API_BASE_URL}${id}`
@@ -97,7 +96,6 @@ export const getChargeState = async (id:string, access_token?:string)=>  {
     },
     method: 'GET'
   })
-  console.log(res.status);
   const data = await res.json();
   return data;
 };
@@ -113,7 +111,6 @@ export const getClimateState = async (id:string, access_token?:string)=>  {
     },
     method: 'GET'
   })
-  console.log(res.status);
   const data = await res.json();
   return data;
 };
