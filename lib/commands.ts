@@ -1,5 +1,19 @@
 import  TESLA_API_BASE_URL from '@tesla-web/lib/constants';
 
+export const doRemoteStart = async (id:string, access_token?:string) => {
+  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const url = `${TESLA_API_BASE_URL}${id}/command/remote_start_drive`
+  const res = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
+    method: 'POST'
+  })
+  const response = await res.json();
+  return response;
+};
+
 export const wakeUp = async (id:string, access_token?:string)=>  {
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
   const url = `${TESLA_API_BASE_URL}${id}/wake_up`

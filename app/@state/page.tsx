@@ -1,3 +1,4 @@
+import { doRemoteStart, wakeUp } from "@tesla-web/lib/commands";
 import { getMobileEnabled, getVehicle, getVehicles } from "@tesla-web/lib/state";
 
 async function getData() {
@@ -11,7 +12,12 @@ async function getData() {
 
   // Take into account a single vehicle only.
   const vehicle = fleetData[0];
+  const remoteStartStatus = await doRemoteStart(vehicle.id);
   const mobileEnabled = await getMobileEnabled(vehicle.id);
+  const wakeUpStatus = await wakeUp(vehicle.id);
+  
+  // console.log(wakeUpStatus.response, remoteStartStatus.response);
+
   return {
     vehicle,
     mobileEnabled: mobileEnabled.response,
@@ -22,8 +28,8 @@ export default async function Page() {
   const data = await getData();
   const stats = [
     { id: 1, name: 'Charge limit', value: '80%' },
-    { id: 2, name: 'Cabin Temperature', value: '13' },
-    { id: 3, name: 'Outside Temperature', value: '13' },
+    { id: 2, name: 'Cabin Temperature', value: 'N/A' },
+    { id: 3, name: 'Outside Temperature', value: 'N/A' },
     { id: 4, name: 'Mobile', value: data.mobileEnabled.toString(), bgColor: data.mobileEnabled === true ? 'bg-green-500': 'bg-red-400',subTextColor: 'text-white', textColor: 'text-white' },
     { id: 5, name: 'State', value: data.vehicle.state, bgColor: data.vehicle.state === 'online' ? 'bg-green-500': 'bg-gray-200', subTextColor: 'text-white', textColor: 'text-white' },
     { id: 6, name: 'Odometer', value: '7855', bgColor: 'bg-blue-600', textColor: 'text-gray-50', subTextColor: 'text-gray-300'},
