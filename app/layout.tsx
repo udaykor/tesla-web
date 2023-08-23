@@ -24,5 +24,5 @@ export default function RootLayout(props: {
 }
 
 
-export const revalidate = 100;
+export const revalidate = 10000;
 export const runtime = 'edge';

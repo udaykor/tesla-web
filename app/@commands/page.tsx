@@ -41,5 +41,5 @@ export default async function Page() {
 }
 
 
-export const revalidate = 100;
+export const revalidate = 10000;
 export const runtime = 'edge';

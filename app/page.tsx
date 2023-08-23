@@ -1,3 +1,4 @@
+
 import { PlusSmallIcon } from '@heroicons/react/20/solid'
 import { LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline'
 import { getVehicles } from '@tesla-web/lib/state'
@@ -56,5 +57,5 @@ export default async function Page() {
   )
 }
 
-export const revalidate = 100;
+export const revalidate = 10000;
 export const runtime = 'edge';
