@@ -6,4 +6,6 @@ export async function GET(request: Request, { params }: {params: { id: string, p
   const which_part = params.part ? params.part: 'rear';
   const response = await actuateTrunk(params.id, which_part)
   return NextResponse.json({ response })
-}
+};
+
+export const runtime = 'edge';

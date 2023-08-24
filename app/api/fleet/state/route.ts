@@ -6,3 +6,5 @@ export async function GET() {
   const vehicles = await getVehicles()
   return NextResponse.json({ vehicles })
 };
+
+export const runtime = 'edge';

@@ -5,4 +5,7 @@ export async function GET(request: Request, { params }: {params: { id: string}})
   // Get All Vehicles
   const response = await setHvacOn(params.id)
   return NextResponse.json({ response })
-}
+};
+
+
+export const runtime = 'edge';

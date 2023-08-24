@@ -5,4 +5,6 @@ import { NextResponse } from "next/server"
 export async function GET(request: Request, { params }: {params: { id: string}}) {
   const vehicle = await getServiceData(params.id)
   return NextResponse.json({ vehicle })
-}
+};
+
+export const runtime = 'edge';

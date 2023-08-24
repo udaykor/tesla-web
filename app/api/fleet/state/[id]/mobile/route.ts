@@ -6,3 +6,6 @@ export async function GET(request: Request, { params }: {params: { id: string}})
   const vehicle = await getMobileEnabled(params.id);
   return NextResponse.json({ vehicle })
 };
+
+
+export const runtime = 'edge';
