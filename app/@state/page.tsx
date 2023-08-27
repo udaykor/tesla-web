@@ -1,3 +1,4 @@
+"use client";
 import { doRemoteStart, wakeUp } from "@tesla-web/lib/commands";
 import { getMobileEnabled, getVehicle, getVehicleData, getVehicles } from "@tesla-web/lib/state";
 import { BsFillRecord2Fill } from 'react-icons/bs';
@@ -7,7 +8,6 @@ import { MILE_TO_KM_MUL, BAR_TO_PSI } from "@tesla-web/lib/constants";
 async function getData() {
   const fleetRaw = await getVehicles();
   const fleet = fleetRaw.response;
-
   const fleetData: any = await Promise.all(fleet.map(async (vehicle: any) => {
     const data = await getVehicle(vehicle.id);
     return data.response;
@@ -54,10 +54,10 @@ export default async function Page() {
   ];
 
   const tirePressureData = [
-    {id: 1, name: 'Front Left', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_fl*BAR_TO_PSI): 'N/A', bgColor: 'bg-gray-950', subTextColor: 'text-white', textColor: 'text-white' },
-    {id: 2, name: 'Front Right', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_fr*BAR_TO_PSI): 'N/A', bgColor: 'bg-gray-950', subTextColor: 'text-white', textColor: 'text-white' },
-    {id: 3, name: 'Rear Left', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_rl*BAR_TO_PSI): 'N/A', bgColor: 'bg-gray-950', subTextColor: 'text-white', textColor: 'text-white' },
-    {id: 4, name: 'Rear Right', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_rr*BAR_TO_PSI): 'N/A', bgColor: 'bg-gray-950', subTextColor: 'text-white', textColor: 'text-white' }
+    {id: 1, name: 'Front Left', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_fl*BAR_TO_PSI): 'N/A', bgColor: 'bg-green-500', subTextColor: 'text-white', textColor: 'text-white' },
+    {id: 2, name: 'Front Right', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_fr*BAR_TO_PSI): 'N/A', bgColor: 'bg-green-500', subTextColor: 'text-white', textColor: 'text-white' },
+    {id: 3, name: 'Rear Left', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_rl*BAR_TO_PSI): 'N/A', bgColor: 'bg-green-500', subTextColor: 'text-white', textColor: 'text-white' },
+    {id: 4, name: 'Rear Right', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_rr*BAR_TO_PSI): 'N/A', bgColor: 'bg-green-500', subTextColor: 'text-white', textColor: 'text-white' }
   ];
 
   vehicleDataRef?.vh_state
@@ -99,5 +99,4 @@ export default async function Page() {
   )
 }
 
-export const revalidate = 10000;
 export const runtime = 'edge';

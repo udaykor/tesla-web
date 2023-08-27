@@ -3,9 +3,9 @@ import { NextResponse } from "next/server"
 
 
 // id and vehicle_id can be numbers?
-export async function GET(request:Request) {
+export async function GET(request:Request) {  
   const vehicle = await getVehicle(request.url.split('=')[1], request.headers.get('uri')?.toString(), undefined);
-  return NextResponse.json({ vehicle})
+  return NextResponse.json({ vehicle })
 };
 
 

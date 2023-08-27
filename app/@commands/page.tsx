@@ -1,4 +1,7 @@
+"use client";
+import { useState  } from 'react';
 import { getVehicles } from '@tesla-web/lib/state';
+
 
 async function getData() {
   const data = await getVehicles()
@@ -8,6 +11,17 @@ async function getData() {
 
 export default async function Page() {
   const data = await getData();
+
+  const executeCommand = (command: string) => {
+    switch(command) {
+      case 'trunk-pop':
+        break;
+      case 'trunk-close':
+        break;
+      default:
+        break;
+    }
+  }
 
   const stats = [
     { id: 1, name: 'API Version', value: data.response[0].api_version, bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
@@ -40,6 +54,4 @@ export default async function Page() {
   )
 }
 
-
-export const revalidate = 10000;
 export const runtime = 'edge';
