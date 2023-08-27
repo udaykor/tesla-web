@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import moment from 'moment';
-import { exec, execSync } from 'child_process'
+import { exec } from 'child_process'
 
 export async function GET(request: Request) {
   // 1693127419 - Good date.
@@ -18,8 +18,6 @@ export async function GET(request: Request) {
         console.log(`stderr: ${stderr}`);
         return;
     }
-    // Check on server-side console
-    return stdout ? stdout: undefined;
   });
 
 
@@ -27,7 +25,7 @@ export async function GET(request: Request) {
     data: {
       input: decodeURI(request.url.split('=')[1]),
       relativeStamp: moment(decodeURI(request.url.split('=')[1])).fromNow(),
-      output,
+      output: output,
     }
   })
 };
