@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# Snyk code
+.dccache
+
 # testing
 /coverage
 
