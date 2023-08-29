@@ -18,16 +18,16 @@ export default async function Page() {
         break;
       case 'trunk-close':
         break;
+      case 'honk':
+        
+        break;
       default:
         break;
     }
   }
 
-  const stats = [
-    { id: 1, name: 'API Version', value: data.response[0].api_version, bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
-    { id: 2, name: 'HVAC', value: 'Off', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200'},
-    { id: 3, name: 'State', value: data.response[0].state, bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' },
-    { id: 4, name: 'Trunk', value: 'Closed', bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200' }
+  const commands = [
+    { id: 1, name: 'honk', value: data.response[0].api_version, bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200', cmd: 'honk' },
   ]
   return (
     <div className="bg-white py-10 sm:py-32">
@@ -39,7 +39,7 @@ export default async function Page() {
             </h2>
           </div>
           <dl key={`commands-list-${data.response[0].id}`} className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat) => (
+            {commands.map((stat) => (
               <button key={`btn-${stat.id}`} type='button'>
                 <div key={stat.id} className={`flex flex-col ${stat.bgColor? stat.bgColor: 'bg-gray-200'} p-8`}>
                   <dt className={`text-sm font-semibold leading-6 ${stat.subTextColor? stat.subTextColor: 'text-slate-950'}`}>{stat.name}</dt>

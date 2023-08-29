@@ -119,6 +119,7 @@ export const actuateTrunk = async (id:string, which_part:string, access_token?:s
 };
 
 export const doorUnlock = async (id: string, access_token?: string) => {
+  console.log("unlocking doors")
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
   const url = `${TESLA_API_BASE_URL}${id}/command/door_unlock`
   const res = await fetch(url, {
@@ -133,8 +134,24 @@ export const doorUnlock = async (id: string, access_token?: string) => {
 }
 
 export const doorLock = async (id: string, access_token?: string) => {
+  console.log('attempting locking doors');
   const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
   const url = `${TESLA_API_BASE_URL}${id}/command/door_lock`
+  const res = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
+    method: 'POST'
+  })
+  const response = await res.json();
+  return response
+};
+
+
+export const remoteStartDrive = async (id: string, access_token?: string) => {
+  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const url = `${TESLA_API_BASE_URL}${id}/command/remote_start_drive`
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
