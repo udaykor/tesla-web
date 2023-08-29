@@ -18,6 +18,7 @@ export async function GET(request: Request) {
         console.log(`stderr: ${stderr}`);
         return;
     }
+    console.log(stdout);
   });
 
 
