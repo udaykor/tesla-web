@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { actuateTrunk, doorLock, doorUnlock, honk, remoteStartDrive, wakeUp, wink } from "@tesla-web/lib/commands"
+import { actuateTrunk, doorLock, doorUnlock, remoteStartDrive, wakeUp, wink } from "@tesla-web/lib/commands"
 import { getVehicles } from "@tesla-web/lib/state";
 
 export async function GET(request: Request) {
@@ -33,4 +33,4 @@ export async function GET(request: Request) {
   return NextResponse.json({ safeResponse, winkResp, remoteDriveResp, doorsOp })
 };
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

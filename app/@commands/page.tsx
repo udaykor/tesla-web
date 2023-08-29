@@ -1,5 +1,3 @@
-"use client";
-import { useState  } from 'react';
 import { getVehicles } from '@tesla-web/lib/state';
 
 
@@ -19,7 +17,6 @@ export default async function Page() {
       case 'trunk-close':
         break;
       case 'honk':
-        
         break;
       default:
         break;
@@ -53,5 +50,3 @@ export default async function Page() {
     </div>
   )
 }
-
-export const runtime = 'edge';

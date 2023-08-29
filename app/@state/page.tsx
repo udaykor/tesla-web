@@ -1,5 +1,3 @@
-"use client";
-import { doRemoteStart, wakeUp } from "@tesla-web/lib/commands";
 import { getMobileEnabled, getVehicle, getVehicleData, getVehicles } from "@tesla-web/lib/state";
 import { BsFillRecord2Fill } from 'react-icons/bs';
 import { MILE_TO_KM_MUL, BAR_TO_PSI } from "@tesla-web/lib/constants";
@@ -15,11 +13,8 @@ async function getData() {
 
   // Take into account a single vehicle only.
   const vehicle = fleetData[0];
-  const remoteStartStatus = await doRemoteStart(vehicle.id);
   const mobileEnabled = await getMobileEnabled(vehicle.id);
-  const wakeUpStatus = await wakeUp(vehicle.id);
   const vh = await getVehicleData(vehicle.id).catch(err => undefined)
-
 
   const vehicleDataRef = vh?  {
     vh_state: vh.response.vehicle_state,
@@ -60,8 +55,6 @@ export default async function Page() {
     {id: 4, name: 'Rear Right', value: vehicleDataRef?.vh_state ? Math.round(vehicleDataRef?.vh_state?.tpms_pressure_rr*BAR_TO_PSI): 'N/A', bgColor: 'bg-green-500', subTextColor: 'text-white', textColor: 'text-white' }
   ];
 
-  vehicleDataRef?.vh_state
-
   return (
     <div className="bg-white py-10 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -94,9 +87,34 @@ export default async function Page() {
             </div>
           ))}
         </dl>
+        <h1 className="pt-5 font-bold text-xl">
+          Vehicle State - Raw
+        </h1>
+        <div className="p-2 m-2">
+          <pre>
+            {`${JSON.stringify(vehicleDataRef?.vh_state, null, 2)}`}
+          </pre>
+        </div>
+
+        <h1 className="pt-5 font-bold text-xl">
+          Vehicle Config - Raw
+        </h1>
+        <div className="p-2 m-2">
+          <pre>
+            {`${JSON.stringify(vehicleDataRef?.config, null, 2)}`}
+          </pre>
+        </div>
+
+        <h1 className="pt-5 font-bold text-xl">
+          Drive State  - Raw
+        </h1>
+        <div className="p-2 m-2">
+          <pre>
+            {`${JSON.stringify(vehicleDataRef?.cl_state, null, 2)}`}
+          </pre>
+        </div>
+
       </div>
     </div>
   )
 }
-
-export const runtime = 'edge';

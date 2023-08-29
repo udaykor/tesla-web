@@ -7,18 +7,23 @@ type AccessToken = {
 }
 
 const client = new Client();
+
 const accessId = process.env.ACCESS_ID || '';
 
 
-export const getCurrentRefreshToken = async () => {
+export const getCurrentToken = async () => {
+  const client = new Client();
   const query = fql`access.byId(${accessId.toString()})`
-  const res: QuerySuccess<AccessToken> = await client.query<AccessToken>(query);
-  const data = res.data;
-  const { accessToken, refreshToken } = data;
-  return { accessToken, refreshToken };
-};
+  const res: void | QuerySuccess<AccessToken> = await client.query<AccessToken>(query).catch(err => console.log('Fetching current token failed'));
+  if (res) {
+    return res.data;
+  } else {
+    return { accessToken: undefined, refreshToken: undefined }
+  }
+}; 
 
 export const updateCurrentTokens = async (data: AccessToken) => {
+  const client = new Client();
   const query = fql`access.byId(${accessId.toString()})!.replace(${data})`;
   const res: QuerySuccess<AccessToken> = await client.query<AccessToken>(query);
   // Return empty
@@ -28,7 +33,7 @@ export const updateCurrentTokens = async (data: AccessToken) => {
 
 // Get new tokens from Tesla
 export const requestNewToken = async () => {
-  const { refreshToken } = await getCurrentRefreshToken()
+  const { accessToken, refreshToken } = await getCurrentToken()
   
   const authRefreshBody = JSON.stringify({
     "grant_type": "refresh_token",

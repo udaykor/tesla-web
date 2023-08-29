@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: {
   children: React.ReactNode,
-  state: React.ReactNode
+  state: React.ReactNode,
   commands: React.ReactNode
 }) {
   return (
@@ -23,5 +23,3 @@ export default function RootLayout(props: {
   )
 }
 
-
-export const runtime = 'edge';
