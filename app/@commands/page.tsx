@@ -24,7 +24,10 @@ export default async function Page() {
   }
 
   const commands = [
-    { id: 1, name: 'honk', value: data.response[0].api_version, bgColor: 'bg-slate-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200', cmd: 'honk' },
+    { id: 1, name: 'Beep!', value: "Primary horn", bgColor: 'bg-blue-600', textColor: 'text-gray-50', subTextColor: 'text-gray-200', cmd: 'honk' },
+    { id: 2, name: 'Bam!', value: "Actuate Trunk", bgColor: 'bg-red-400', textColor: 'text-gray-50', subTextColor: 'text-gray-200', cmd: 'honk' },
+    { id: 3, name: 'Wink 😉', value: "Flash lights", bgColor: 'bg-gray-200', textColor: 'text-gray-950', subTextColor: 'text-gray-900', cmd: 'honk' },
+    { id: 4, name: 'Powered by Snyk+NextJS', value: "Remote drive", bgColor: 'bg-purple-600', textColor: 'text-gray-50', subTextColor: 'text-gray-200', cmd: 'honk' },
   ]
   return (
     <div className="bg-white py-10 sm:py-32">
@@ -45,6 +48,11 @@ export default async function Page() {
               </button>
             ))}
           </dl>
+          <div className='mt-5'>
+            <p className="font-medium">
+              This section will be updated for Sep webinar as part of the Masterclass series
+            </p>
+          </div>
         </div>
       </div>
     </div>
