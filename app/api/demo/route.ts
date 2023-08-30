@@ -1,14 +1,9 @@
 import { NextResponse } from "next/server"
 import { actuateTrunk, doorLock, doorUnlock, remoteStartDrive, wakeUp, wink } from "@tesla-web/lib/commands"
-import { getVehicles } from "@tesla-web/lib/state";
+import getCarId from "@tesla-web/lib/carId";
 
 export async function GET(request: Request) {
-  // Get All Vehicles
-  const resV = await getVehicles();
-  // Remember: Do not share randomnly resV or Vehciles - sensitive data - VIN, car ID, GPS (car state call)
-  const vehicles =  resV.response;
-  // Do not log this ID - This is static 
-  const id = vehicles[0].id;
+  const id = await getCarId();
   // Attempt to wake the vehicle up in case it goes to sleep.
   const remoteStartResp = await wakeUp(id);
   // Avoiding sending all the data 

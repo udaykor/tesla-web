@@ -1,11 +1,18 @@
 import { NextResponse } from "next/server"
 import { actuateTrunk } from "@tesla-web/lib/commands"
+import getCarId from "@tesla-web/lib/carId";
 
-export async function GET(request: Request, { params }: {params: { id: string, part?:string}}) {
-  // Get All Vehicles
-  const which_part = params.part ? params.part: 'rear';
-  const response = await actuateTrunk(params.id, which_part)
-  return NextResponse.json({ response })
+export async function GET(request: Request) {
+  // Open Trunk and not frunk
+  try {
+    const which_part = 'rear';
+    const id = await getCarId();
+    const response = await actuateTrunk(id, which_part)
+    return NextResponse.json({ response })
+  } catch(err: any) {
+    console.log('Failed to actuate rear-trunk')
+    return NextResponse.json({ errMsg: 'Failed to actuate rear-trunk' });
+  }
 };
 
 

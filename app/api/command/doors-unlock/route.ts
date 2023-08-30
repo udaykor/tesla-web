@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server"
 import { doorUnlock } from "@tesla-web/lib/commands"
+import getCarId from "@tesla-web/lib/carId";
 
-export async function GET(request: Request, { params }: {params: { id: string}}) {
-  // Get All Vehicles
-  const response = await doorUnlock(params.id);
-  return NextResponse.json({ response });
+export async function GET(request: Request) {
+  try {
+    const id = await getCarId();
+    const response = await doorUnlock(id);
+    return NextResponse.json({ response });
+  } catch(err: any) {
+    console.log('Failed to unlock doors');
+    return NextResponse.json({ msg: 'Failed to unlock doors'})
+  }
 };
 
 
