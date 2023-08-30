@@ -1,7 +1,11 @@
 import  TESLA_API_BASE_URL from '@tesla-web/lib/constants';
+import { requestNextNewToken } from '@tesla-web/lib/authz';
+
+
 
 export const doRemoteStart = async (id:string, access_token?:string) => {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/remote_start_drive`
   const res = await fetch(url, {
     headers: {
@@ -15,7 +19,8 @@ export const doRemoteStart = async (id:string, access_token?:string) => {
 };
 
 export const wakeUp = async (id:string, access_token?:string)=>  {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/wake_up`
   const res = await fetch(url, {
     headers: {
@@ -30,7 +35,8 @@ export const wakeUp = async (id:string, access_token?:string)=>  {
 
 
 export const setHvacOn = async (id:string, access_token?:string) =>  {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/auto_conditioning_start`
   const res = await fetch(url, {
     headers: {
@@ -45,7 +51,8 @@ export const setHvacOn = async (id:string, access_token?:string) =>  {
 
 
 export const setHvacOff = async (id:string, access_token?:string) =>  {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/auto_conditioning_stop`
   const res = await fetch(url, {
     headers: {
@@ -59,7 +66,8 @@ export const setHvacOff = async (id:string, access_token?:string) =>  {
 };
 
 export const setTemperature = async (id:string, driver_temp:string, passenger_temp:string, access_token?:string)=>  {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/set_temps?driver_tmep=${driver_temp}&passenger_temp=${passenger_temp}`
   const res = await fetch(url, {
     headers: {
@@ -74,7 +82,8 @@ export const setTemperature = async (id:string, driver_temp:string, passenger_te
 
 
 export const honk = async (id:string, access_token?:string) =>  {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/honk_horn`
   const res = await fetch(url, {
     headers: {
@@ -88,7 +97,8 @@ export const honk = async (id:string, access_token?:string) =>  {
 };
 
 export const wink = async (id:string, access_token?:string) =>  {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/flash_lights`
   const res = await fetch(url, {
     headers: {
@@ -102,7 +112,8 @@ export const wink = async (id:string, access_token?:string) =>  {
 };
 
 export const actuateTrunk = async (id:string, which_part:string, access_token?:string) =>  {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/actuate_trunk?which_trunk=${which_part}`
   const res = await fetch(url, {
     headers: {
@@ -120,7 +131,8 @@ export const actuateTrunk = async (id:string, which_part:string, access_token?:s
 
 export const doorUnlock = async (id: string, access_token?: string) => {
   console.log("unlocking doors")
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/door_unlock`
   const res = await fetch(url, {
     headers: {
@@ -135,7 +147,8 @@ export const doorUnlock = async (id: string, access_token?: string) => {
 
 export const doorLock = async (id: string, access_token?: string) => {
   console.log('attempting locking doors');
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/door_lock`
   const res = await fetch(url, {
     headers: {
@@ -150,7 +163,8 @@ export const doorLock = async (id: string, access_token?: string) => {
 
 
 export const remoteStartDrive = async (id: string, access_token?: string) => {
-  const token = process.env.ACCESS_TOKEN ? `Bearer ${process.env.ACCESS_TOKEN}`: `Bearer ${access_token}`
+  const { accessToken } = await requestNextNewToken();
+  const token =  `Bearer ${accessToken}`;
   const url = `${TESLA_API_BASE_URL}${id}/command/remote_start_drive`
   const res = await fetch(url, {
     headers: {

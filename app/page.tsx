@@ -1,6 +1,7 @@
 
 import { PlusSmallIcon } from '@heroicons/react/20/solid'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
+import { requestNextNewToken } from '@tesla-web/lib/authz'
 import { getVehicles } from '@tesla-web/lib/state'
 import { SiTesla, SiSnyk } from 'react-icons/si'
 
