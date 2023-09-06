@@ -1,4 +1,4 @@
-FROM node:lts-buster AS base
+FROM node:20.5.1-bookworm-slim AS base
 
 # To-Do: 
 # 1. Multi-Stage to reduce size.
