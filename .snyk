@@ -1,0 +1,12 @@
+custom_rules:
+  - id: 'Third-Party SQLi'
+    description: 'Data from external parties needs to go through a sanitiser to prevent XSS, SQLI or '
+    severity: 'high'
+    cwe:
+      - 'CWE-89'
+    fix_analysis: 'Create or make use of input sanitisation. Having a Typescript type is not sufficient as Typescript is for development use and not for production.'
+    rule_code: 'Taint<PRED:SourceNonServer, PRED:SourceRequestUrl, PRED:SqliSink>'
+    languages:
+      - 'javascript'
+      - 'typescript'
+

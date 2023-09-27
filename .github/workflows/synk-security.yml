@@ -1,0 +1,38 @@
+name: Snyk Security Checks
+
+on:
+  push:
+    branches: ["dev" ]
+  pull_request:
+    branches: ["dev"]
+
+permissions:
+  contents: read
+
+#defines the jobs to be run
+jobs:
+
+  #only 1 job run snyk delta and if that passes run snyk monitor
+  snyk-checks:
+
+    #run this on an ubuntu runner using one of snyks node images as a container
+    runs-on: ubuntu-latest
+    container: docker://snyk/snyk:node
+
+    #this is where you define the steps to be run within each job
+    steps:
+     #use the current repo
+     - uses: actions/checkout@master
+     #install dependencies
+     - run: yarn global add snyk-delta
+     - run: yarn
+     - name: Set Snyk ORG
+       run: snyk config set org=f057a5e7-f8e3-4311-873f-59428c030551
+     #authenticate with your snyk token
+     - run: snyk auth ${{ secrets.SNYK_TOKEN }}
+     #run a snyk delta test only failing of there are new criticial issues, Not if the project hasn't been monitored
+     - run: snyk test --json --print-deps | snyk-delta --setPassIfNoBaseline true
+     #if the previous scan doesn't come back with an error code then monitor the project
+     - run: snyk monitor
+     - name: Snyk Code Checks
+       run: snyk code test
